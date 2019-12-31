@@ -1,0 +1,18 @@
+.chart-container {
+  font-family: monospace;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+.chart-row {
+  height: 1.5rem;
+}
+
+.chart-cell {
+  padding: 0.25rem;
+}

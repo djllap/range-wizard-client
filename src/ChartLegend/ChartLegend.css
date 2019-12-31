@@ -1,0 +1,10 @@
+.legend-color {
+  min-width: 1rem;
+  min-height: 1rem;
+  display: inline-block;
+}
+
+.chart-legend {
+  padding: 1rem;
+  background-color: grey;
+}
