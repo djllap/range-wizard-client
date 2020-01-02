@@ -1,0 +1,9 @@
+.chart-toolbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-col {
+  display: flex;
+  flex-direction: column;
+}
