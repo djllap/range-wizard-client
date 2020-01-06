@@ -44,6 +44,8 @@ export default function Chart(props) {
               ranges={props.ranges}
               currentRange={props.currentRange}
               mouseDown={props.mouseDown}
+              setAddingToRange={props.setAddingToRange}
+              addingToRange={props.addingToRange}
             />
           }
           )}

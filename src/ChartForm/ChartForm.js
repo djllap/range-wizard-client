@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import Chart from '../Chart/Chart';
 import RangeForm from '../RangeForm/RangeForm';
 import config from '../config';
@@ -11,7 +10,8 @@ class ChartForm extends Component {
     ranges: [],
     newRangeName: '',
     currentRange: undefined,
-    mouseDown: false
+    mouseDown: false,
+    addingToRange: true
   }
 
   componentDidMount() {
@@ -24,6 +24,10 @@ class ChartForm extends Component {
         currentRange: currentRangeIndex
       });
     }
+  }
+
+  setAddingToRange = (bool) => {
+    this.setState({addingToRange: bool});
   }
 
   handleChartNameChange = (e) => {
@@ -188,6 +192,8 @@ class ChartForm extends Component {
           handleChartMouseDown={this.handleChartMouseDown}
           handleChartMouseUp={this.handleChartMouseUp}
           mouseDown={this.state.mouseDown}
+          setAddingToRange={this.setAddingToRange}
+          addingToRange={this.state.addingToRange}
         />
         <form className="chart-name-form">
           <input 
@@ -227,4 +233,4 @@ class ChartForm extends Component {
   }
 }
 
-export default withRouter(ChartForm);
+export default ChartForm;
