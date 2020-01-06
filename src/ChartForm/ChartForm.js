@@ -10,16 +10,19 @@ class ChartForm extends Component {
     chart: {id: undefined, chart_name: ''},
     ranges: [],
     newRangeName: '',
-    currentRange: undefined
+    currentRange: undefined,
+    mouseDown: false
   }
 
   componentDidMount() {
+    const currentRangeIndex = (this.props.ranges.length > 0) ? 0 : undefined;
+
     if (this.props.chart.id) {
       this.setState({
         chart: this.props.chart,
         ranges: this.props.ranges,
-        currentRange: this.props.ranges[0]
-      })
+        currentRange: currentRangeIndex
+      });
     }
   }
 
@@ -37,9 +40,20 @@ class ChartForm extends Component {
   }
 
   handleNewChartSubmit = (e) => {
-    const method = this.state.chart.id ? 'PATCH' : 'POST';
-    const idURL = this.state.chart.id ? `/${this.state.chart.id}` : '';
-    const fields = { chart_name: this.state.chart.chart_name }
+    let method;
+    let idURL;
+    let chartMethod;
+    const fields = { chart_name: this.state.chart.chart_name };
+
+    if (this.state.chart.id) {
+      method = 'PATCH';
+      idURL = `/${this.state.chart.id}`;
+      chartMethod = this.props.editChart;
+    } else {
+      method = 'POST';
+      idURL = '';
+      chartMethod = this.props.addChart;
+    }
 
     fetch(`${config.baseURL}/charts${idURL}`, {
       method: method,
@@ -52,7 +66,7 @@ class ChartForm extends Component {
     .then(res => res.json())
     .then(chart => {
       this.props.selectChart(chart);
-      this.props.addChart(chart);
+      chartMethod(chart);
       const rangesToPatch = this.state.ranges.filter(range => range.id)
       const rangesToPost = this.state.ranges.filter(range => !range.id)
       .map(range => {
@@ -150,10 +164,12 @@ class ChartForm extends Component {
     this.setState({currentRange: index});
   }
 
-  setStateAsync(state) {
-    return new Promise((resolve) => {
-      this.setState(state, resolve)
-    });
+  handleChartMouseDown = (e) => {
+    this.setState({mouseDown: true})
+  }
+
+  handleChartMouseUp = (e) => {
+    this.setState({mouseDown: false})
   }
   
   render() {
@@ -169,6 +185,9 @@ class ChartForm extends Component {
           ranges={this.state.ranges}
           updateRanges={this.updateRanges}
           currentRange={this.state.currentRange}
+          handleChartMouseDown={this.handleChartMouseDown}
+          handleChartMouseUp={this.handleChartMouseUp}
+          mouseDown={this.state.mouseDown}
         />
         <form className="chart-name-form">
           <input 

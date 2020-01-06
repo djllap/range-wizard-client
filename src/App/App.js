@@ -40,6 +40,13 @@ class App extends Component {
     this.setState({charts: [...this.state.charts, chart]})
   }
 
+  editChart = (chart) => {
+    const charts = [...this.state.charts].map(c => {
+      return (c.id === chart.id) ? chart : c;
+    })
+    this.setState({charts: charts})
+  }
+
   addRanges = (newRanges) => {
     this.setState({ranges: [...this.state.ranges, ...newRanges]});
   }
@@ -79,6 +86,7 @@ class App extends Component {
         chart={this.state.currentChart}
         selectChart={this.selectChart}
         addChart={this.addChartToCharts}
+        editChart={this.editChart}
         addRanges={this.addRanges}
         editRanges={this.editRanges}
         ranges={currentRanges}

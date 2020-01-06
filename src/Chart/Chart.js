@@ -20,7 +20,11 @@ export default function Chart(props) {
   ];
 
   return (
-    <div className="chart-container">
+    <div 
+      className="chart-container"
+      onMouseDown={props.handleChartMouseDown}
+      onMouseUp={props.handleChartMouseUp}
+    >
       {matrix.map((row, x) => 
         <div className="chart-row" key={x}>
           {row.map((hand, y) => {
@@ -39,6 +43,7 @@ export default function Chart(props) {
               updateRanges={props.updateRanges}
               ranges={props.ranges}
               currentRange={props.currentRange}
+              mouseDown={props.mouseDown}
             />
           }
           )}

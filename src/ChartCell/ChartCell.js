@@ -28,13 +28,21 @@ export default function ChartCell(props) {
     updateRanges(newRanges);
   }
 
-  const event = props.updateRanges && props.currentRange !== undefined ? addCellToRange : null;
+  let hoverEvent = null;
+  let mouseDownEvent = null;
+  if (props.updateRanges && props.currentRange !== undefined) {
+    mouseDownEvent = addCellToRange;
+    if (props.mouseDown) {
+      hoverEvent = addCellToRange;
+    }
+  }
 
   return (
     <span 
       className="chart-cell"
       style={{backgroundColor: props.color}}
-      onMouseDown={event}
+      onMouseOver={hoverEvent}
+      onMouseDown={mouseDownEvent}
     >
       {props.hand}
     </span>
