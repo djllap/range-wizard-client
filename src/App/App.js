@@ -19,10 +19,12 @@ class App extends Component {
     fetch(`${config.baseURL}/charts`)
       .then(res => res.json())
       .then(charts => {
-        this.setState({
-          charts: charts,
-          currentChart: charts[0]
-        })
+        if (charts.length > 0) {
+          this.setState({
+            charts: charts,
+            currentChart: charts[0]
+          })
+        }
       });
       
     fetch(`${config.baseURL}/ranges`)
@@ -67,12 +69,16 @@ class App extends Component {
   deleteChart = (id) => {
     const filteredCharts = this.state.charts.filter(chart => chart.id !== id);
     const chartIndex = this.state.charts.findIndex(chart => chart.id === id);
-    this.setState({charts: filteredCharts, currentChart: this.state.charts[chartIndex-1]});
+    const index = (chartIndex === 0) ? 1 : chartIndex - 1;
+    this.setState({charts: filteredCharts, currentChart: this.state.charts[index]});
 
   }
 
   toggleEditing = () => {
     this.setState({editing: !this.state.editing});
+    if (!this.state.currentChart.id && this.state.charts.length > 0) {
+      this.setState({currentChart: this.state.charts[0]})
+    }
   }
 
   render() {

@@ -223,10 +223,10 @@ class ChartForm extends Component {
           Submit Chart
         </button>
         <button
-          className="cancel-edit-btn"
+          className="cancel-form-btn"
           onClick={this.props.toggleEditing}
         >
-          Cancel Edit
+          Cancel
         </button>
       </div>
     );
