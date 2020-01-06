@@ -35,6 +35,10 @@ export default function Chart(props) {
               key={y}
               hand={hand}
               color={color}
+              coords={`${x},${y}`}
+              updateRanges={props.updateRanges}
+              ranges={props.ranges}
+              currentRange={props.currentRange}
             />
           }
           )}

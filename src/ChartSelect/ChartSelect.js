@@ -2,10 +2,8 @@ import React from 'react';
 
 export default function ChartSelect(props) {
   const selectChart = (e) => {
-    const chartToSet = props.charts.find(chart => {
-      return chart.chart_name === e.currentTarget.value;
-    })
-    props.setChart(chartToSet);
+    const chart = props.charts.find(c => c.id === Number(e.target.value));
+    props.setChart(chart);
   };
 
   return (
@@ -13,12 +11,12 @@ export default function ChartSelect(props) {
       name="chart-select" 
       id="chart-select"
       onChange={selectChart}
+      value={props.currentChartId}
     >
       {props.charts.map((chart, i) =>
         <option 
-          value={chart.chart_name} 
+          value={chart.id} 
           key={i}
-          chart={chart}
         >
           {chart.chart_name}
         </option>

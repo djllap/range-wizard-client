@@ -1,0 +1,7 @@
+.range-row {
+  padding: 0.5rem;
+}
+
+.range-row.selected {
+  background-color: purple;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import config from '../config';
 
 import Header from '../Header/Header';
 import Landing from '../Landing/Landing';
@@ -10,14 +11,12 @@ class App extends Component {
   state = {
     charts: [],
     ranges: [],
-    currentChart: {id: 0},
-    formChart: {chart_name: ''},
-    formRanges: [],
-    formNewRangeName: ''
+    currentChart: {id: ''},
+    editing: false
   };
 
   componentDidMount() {
-    fetch('https://range-wizard.herokuapp.com/api/charts')
+    fetch(`${config.baseURL}/charts`)
       .then(res => res.json())
       .then(charts => {
         this.setState({
@@ -26,57 +25,74 @@ class App extends Component {
         })
       });
       
-    fetch(`http://range-wizard.herokuapp.com/api/ranges`)
+    fetch(`${config.baseURL}/ranges`)
       .then(res => res.json())
       .then(ranges => {
         this.setState({ranges: ranges})
       });
   }
 
-  handleSelectChart = (chart) => {
+  selectChart = (chart) => {
     this.setState({currentChart: chart});
   }
 
-  handleFormChartChange = (e) => {
-    this.setState({ formChart: {chart_name: e.target.value} });
+  addChartToCharts = (chart) => {
+    this.setState({charts: [...this.state.charts, chart]})
   }
 
-  handleFormNewRangeNameChange = (e) => {
-    this.setState({formNewRangeName: e.target.value});
+  addRanges = (newRanges) => {
+    this.setState({ranges: [...this.state.ranges, ...newRanges]});
   }
 
-  createFormRange = (e) => {
-    e.preventDefault();
-    this.setState(
-      {
-        formRanges: [
-          ...this.state.formRanges, 
-          {
-            chart_id: this.state.currentChart.id,
-            color: '',
-            coords: [],
-            range_name: this.state.formNewRangeName
-          }
-        ],
-        formNewRangeName: ''
-      }
-    );
+  editRanges = (rangesToEdit) => {
+    console.log(rangesToEdit);
+    const rangesToEditIds = rangesToEdit.map(range => range.id);
+    const ranges = this.state.ranges.map(range => {
+      return rangesToEditIds.includes(range.id) ?
+        rangesToEdit.find(r => r.id === range.id )
+        :
+        range;
+    });
+
+    this.setState({ranges: ranges})
   }
 
-  updateFormRange = (range, index) => {
-    let ranges = Object.assign(this.state.formRanges);
-    ranges[index] = range;
-    this.setState({ranges});
+  deleteChart = (id) => {
+    const filteredCharts = this.state.charts.filter(chart => chart.id !== id);
+    const chartIndex = this.state.charts.findIndex(chart => chart.id === id);
+    this.setState({charts: filteredCharts, currentChart: this.state.charts[chartIndex-1]});
+
   }
-  
+
+  toggleEditing = () => {
+    this.setState({editing: !this.state.editing});
+  }
+
   render() {
     const ranges = this.state.ranges || [];
-    let currentRanges = [];
-    if (this.state.currentChart) {
-      currentRanges = ranges.filter(range => {
+    const currentRanges = ranges.filter(range => {
         return range.chart_id === this.state.currentChart.id;
-      })
-    }
+    });
+
+    const chartComponent = (this.state.editing) ?
+      <ChartForm 
+        chart={this.state.currentChart}
+        selectChart={this.selectChart}
+        addChart={this.addChartToCharts}
+        addRanges={this.addRanges}
+        editRanges={this.editRanges}
+        ranges={currentRanges}
+        toggleEditing={this.toggleEditing}
+      />
+      :
+      <ChartView 
+        charts={this.state.charts}
+        currentChart={this.state.currentChart}
+        ranges={currentRanges}
+        selectChart={this.selectChart}
+        deleteChart={this.deleteChart}
+        toggleEditing={this.toggleEditing}
+      />;
 
     return (
       <main className='App'>
@@ -88,28 +104,29 @@ class App extends Component {
             component={Landing}
           />
           <Route path="/charts" exact
-            render={(props) => 
-              <ChartView 
-                charts={this.state.charts}
-                currentChart={this.state.currentChart}
-                ranges={currentRanges}
-                handleSelectChart={this.handleSelectChart}
-              />
-            }
+            render={(props) => chartComponent}
           />
-          <Route path="/charts/new"
+          {/* <Route path="/charts/new"
             render={(props) => 
               <ChartForm 
-                ranges={this.state.formRanges}
-                chartName={this.state.formChart.chart_name}
-                handleChartNameChange={this.handleFormChartChange}
-                newNameRange={this.state.formNewRangeName}
-                handleRangeNameChange={this.handleFormNewRangeNameChange}
-                createRange={this.createFormRange}
-                updateRange={this.updateFormRange}
+                currentChart={{id: null}}
+                selectChart={this.selectChart}
+                addChart={this.addChartToCharts}
+                addRanges={this.addRanges}
               />
             }
           />
+          <Route path="/charts/:chart_id/edit"
+            render={(props) => 
+              <ChartForm 
+                currentChart={this.state.currentChart}
+                selectChart={this.selectChart}
+                addChart={this.addChartToCharts}
+                addRanges={this.addRanges}
+                ranges={currentRanges}
+              />
+            }
+          /> */}
         </BrowserRouter>
       </main>
     );
