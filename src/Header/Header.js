@@ -7,8 +7,16 @@ export default function Header(props) {
   return (
     <header>
       <span className="app-icon">
-        <Link to="/charts">Range Wizard</Link>
+        <img 
+          className="logo-img"
+          src={require("./RangeWizardLogo.png")} 
+          alt="Range Wizard Logo"
+          onClick={() => props.history.push('/')}
+        />
       </span>
+      <Link className="nav-tutorial" to="/">
+        Tutorial
+      </Link>
     </header>
   );
 }

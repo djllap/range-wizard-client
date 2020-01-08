@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Chart from '../Chart/Chart';
 import RangeForm from '../RangeForm/RangeForm';
 import config from '../config';
-
+import './ChartForm.css'
 
 class ChartForm extends Component {
   state = {
@@ -179,7 +179,7 @@ class ChartForm extends Component {
   render() {
     let title = 'New Chart'
     if (this.props.chart.id) {
-      title = 'Edit Chart'
+      title = `Editing ${this.state.chart.chart_name}`
     }
 
     return (
@@ -196,7 +196,14 @@ class ChartForm extends Component {
           addingToRange={this.state.addingToRange}
         />
         <form className="chart-name-form">
-          <input 
+          <label 
+            className="chart-name-label"
+            htmlFor="chart-name-input"
+          >
+            Chart Name: 
+          </label>
+          <input
+            className="chart-name-input"
             type="text"
             id="chart-name-input"
             placeholder='Chart Name'
@@ -204,30 +211,30 @@ class ChartForm extends Component {
             onChange={this.handleChartNameChange}
           />
         </form>
-        <div className="chart-toolbar">
-          <RangeForm
-            ranges={this.state.ranges}
-            newRangeName={this.state.newRangeName}
-            handleRangeNameChange={this.handleRangeNameChange}
-            createRange={this.createRange}
-            updateRange={this.updateRange}
-            deleteRange={this.deleteRange}
-            setRange={this.setRange}
-            currentRange={this.state.currentRange}
-          />
+        <RangeForm
+          ranges={this.state.ranges}
+          newRangeName={this.state.newRangeName}
+          handleRangeNameChange={this.handleRangeNameChange}
+          createRange={this.createRange}
+          updateRange={this.updateRange}
+          deleteRange={this.deleteRange}
+          setRange={this.setRange}
+          currentRange={this.state.currentRange}
+        />
+        <div className="chart-btns-container">
+          <button
+            className="cancel-form-btn chart-btn"
+            onClick={this.props.toggleEditing}
+          > 
+            Cancel
+          </button>
+          <button
+            className="submit-chart-btn chart-btn"
+            onClick={this.handleNewChartSubmit}
+          >
+            Submit
+          </button>
         </div>
-        <button
-          className="submit-chart-btn"
-          onClick={this.handleNewChartSubmit}
-        >
-          Submit Chart
-        </button>
-        <button
-          className="cancel-form-btn"
-          onClick={this.props.toggleEditing}
-        >
-          Cancel
-        </button>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import config from '../config';
+import './ChartBtns.css';
 
 export default function ChartBtns(props) {
   const handleNewClick = () => {
@@ -23,19 +24,19 @@ export default function ChartBtns(props) {
   return (
     <div className="button-col">
       <button
-        className="new-btn"
+        className="new-btn chart-btn"
         onClick={handleNewClick}
       >
         New Chart
       </button>
       <button
-        className="edit-btn"
+        className="edit-btn chart-btn"
         onClick={handleEditClick}
       >
         Edit Chart
       </button>
       <button
-        className='del-btn'
+        className='del-btn chart-btn'
         onClick={handleDeleteClick}
       >
         Delete Chart

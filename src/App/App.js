@@ -6,13 +6,15 @@ import Header from '../Header/Header';
 import Landing from '../Landing/Landing';
 import ChartView from '../ChartView/ChartView';
 import ChartForm from '../ChartForm/ChartForm';
+import './App.css';
 
 class App extends Component {
   state = {
     charts: [],
     ranges: [],
     currentChart: {id: ''},
-    editing: false
+    editing: false,
+    error: undefined
   };
 
   componentDidMount() {
@@ -25,13 +27,18 @@ class App extends Component {
             currentChart: charts[0]
           })
         }
-      });
-      
-    fetch(`${config.baseURL}/ranges`)
-      .then(res => res.json())
-      .then(ranges => {
-        this.setState({ranges: ranges})
-      });
+      })
+      .then(() => {
+        fetch(`${config.baseURL}/ranges`)
+          .then(res => res.json())
+          .then(ranges => {
+            this.setState({ranges: ranges})
+          })
+      })
+      .catch(e => {
+        const error = Object.entries(e).length ? e : 'Failed to load charts';
+        this.setState({error: error});
+      })
   }
 
   selectChart = (chart) => {
@@ -81,6 +88,10 @@ class App extends Component {
     }
   }
 
+  setError = (error) => {
+    this.setState({error: error});
+  }
+
   render() {
     const ranges = this.state.ranges || [];
     const currentRanges = ranges.filter(range => {
@@ -106,6 +117,8 @@ class App extends Component {
         selectChart={this.selectChart}
         deleteChart={this.deleteChart}
         toggleEditing={this.toggleEditing}
+        error={this.state.error}
+        setError={this.setError}
       />;
 
     return (
@@ -114,33 +127,15 @@ class App extends Component {
           <Route path="/"
             component={Header}
           />
-          <Route path="/" exact
-            component={Landing}
-          />
-          <Route path="/charts" exact
-            render={(props) => chartComponent}
-          />
-          {/* <Route path="/charts/new"
-            render={(props) => 
-              <ChartForm 
-                currentChart={{id: null}}
-                selectChart={this.selectChart}
-                addChart={this.addChartToCharts}
-                addRanges={this.addRanges}
-              />
-            }
-          />
-          <Route path="/charts/:chart_id/edit"
-            render={(props) => 
-              <ChartForm 
-                currentChart={this.state.currentChart}
-                selectChart={this.selectChart}
-                addChart={this.addChartToCharts}
-                addRanges={this.addRanges}
-                ranges={currentRanges}
-              />
-            }
-          /> */}
+          <div className="big-container">
+            <Route path="/" exact
+              component={Landing}
+            />
+            <Route path="/charts" exact
+              render={(props) => chartComponent}
+            />
+          </div>
+          
         </BrowserRouter>
       </main>
     );

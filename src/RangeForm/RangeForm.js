@@ -36,6 +36,7 @@ export default function RangeBtns(props) {
 
   const colorSelect = (range) => (
     <select 
+      className="color-select"
       id={`color-select-${range.id}`}
       key={range.id}
       value={range.color}
@@ -70,19 +71,25 @@ export default function RangeBtns(props) {
   )
 
   return (
-    <div className="chart-legend">
-      <h3>Ranges</h3>
-      <div className="range-btns">
+    <div className="range-form">
+      <h3 className="range-form-title">Ranges</h3>
+      <div className="range-row">
         <form
+          className="new-range-form"
           onSubmit={props.createRange}
         >  
-          <input 
-            type="text"
-            id="range-name-input"
-            placeholder='New Range Name'
-            value={props.newRangeName}
-            onChange={props.handleRangeNameChange}
-          />
+          <span>
+            <label htmlFor="range-name-input">Range Name: </label>
+            <input 
+              className="range-name-input"
+              type="text"
+              size="15"
+              id="range-name-input"
+              placeholder='New Range Name'
+              value={props.newRangeName}
+              onChange={props.handleRangeNameChange}
+            />
+          </span>
           <button 
             className="new-range-btn"
           >
@@ -92,12 +99,13 @@ export default function RangeBtns(props) {
       </div>
       {props.ranges.map((range, i) => (
         <div 
-          className={`range-row legend-row ${props.currentRange === i ? 'selected' : ''}`}
+          className={`range-row ${props.currentRange === i ? 'selected' : ''}`}
           key={i}
           onClick={(e) => props.setRange(i, e)}
         >
           {colorSelect(range)}
-          <input 
+          <input
+            className="range-name-row-input"
             type="text"
             value={range.range_name}
             onChange={(e) => updateRangeName(range, e)}

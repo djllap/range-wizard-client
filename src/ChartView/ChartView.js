@@ -3,13 +3,19 @@ import Chart from '../Chart/Chart';
 import ChartSelect from '../ChartSelect/ChartSelect';
 import ChartLegend from '../ChartLegend/ChartLegend';
 import ChartBtns from '../ChartBtns/ChartBtns';
+import ErrorBox from '../ErrorBox/ErrorBox';
 import './ChartView.css';
 
 export default function ChartView(props) {
+  const chartName = props.currentChart.chart_name ? 
+    props.currentChart.chart_name.toUpperCase() :
+    props.currentChart.chart_name;
+  const errorBox = (props.error) ? <ErrorBox error={props.error} setError={props.setError}/> : '';
 
   return (
     <div className="chart-view">
-      <h2>Your Charts</h2>
+      <h2>CHARTS: {chartName}</h2>
+      {errorBox}
       <Chart 
         ranges={props.ranges}
       />
@@ -17,7 +23,6 @@ export default function ChartView(props) {
         charts={props.charts} 
         setChart={props.selectChart}
         currentChartId={props.currentChart.id}
-        currentChartName={props.currentChart.name}
       />
       <div className="chart-toolbar">
         <ChartLegend

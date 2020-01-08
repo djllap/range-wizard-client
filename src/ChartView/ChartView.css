@@ -1,4 +1,5 @@
 .chart-toolbar {
+  margin-top: 0.5rem;
   display: flex;
   flex-direction: row;
 }
@@ -6,4 +7,9 @@
 .button-col {
   display: flex;
   flex-direction: column;
+  flex: 1;
+}
+
+.chart-view {
+ max-width: 23.4rem
 }

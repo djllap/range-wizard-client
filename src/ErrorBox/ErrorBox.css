@@ -1,0 +1,21 @@
+.error-box {
+  background-color: rgba(175, 40, 40, 0.5);
+  margin: 0.5rem 0 0.5rem 0;
+  padding: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.error-close {
+  position: absolute;
+  right: 0.25rem;
+  cursor: pointer;
+}
+
+.material-icons.error-close {
+  font-size: 0.8rem;
+  color: darkslategrey;
+}

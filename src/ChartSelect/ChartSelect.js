@@ -1,4 +1,5 @@
 import React from 'react';
+import './ChartSelect.css';
 
 export default function ChartSelect(props) {
   const selectChart = (e) => {
@@ -8,6 +9,7 @@ export default function ChartSelect(props) {
 
   return (
     <select 
+      className="chart-select"
       name="chart-select" 
       id="chart-select"
       onChange={selectChart}

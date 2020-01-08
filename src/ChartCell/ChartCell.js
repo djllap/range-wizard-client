@@ -1,4 +1,5 @@
 import React from 'react';
+import './ChartCell.css';
 
 export default function ChartCell(props) {
   const { ranges, currentRange, coords, updateRanges} = props;

@@ -1,10 +1,22 @@
 .legend-color {
   min-width: 1rem;
   min-height: 1rem;
-  display: inline-block;
+  max-width: 1rem;
+  max-height: 1rem;
+  display: flex;
+  margin-right: 0.5rem;
 }
 
 .chart-legend {
   padding: 1rem;
   background-color: grey;
+  flex: 1;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+}
+
+.legend-row {
+  display: flex;
+  margin-bottom: 0.25rem;
+  align-items: center;
 }

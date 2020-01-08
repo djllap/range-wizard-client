@@ -12,7 +12,7 @@ export default function ChartLegend(props) {
             style={{backgroundColor: range.color}}
           />
           <span className="legend-label">
-            {` = ${range.range_name}`}
+            {`${range.range_name}`}
           </span>
         </div>
       )}

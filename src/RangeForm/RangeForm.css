@@ -1,7 +1,49 @@
+.range-form {
+  background-color: grey;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.range-form-title {
+  margin-left: 0.5rem;
+}
+
 .range-row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
   padding: 0.5rem;
 }
 
 .range-row.selected {
-  background-color: purple;
+  background-color: #863271;
+}
+
+.range-name-input {
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+.range-name-row-input {
+  background-color: grey;
+  border: none;
+  padding: 0.2rem;
+  color: white;
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+.color-select {
+  width: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.new-range-form {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-between;
 }

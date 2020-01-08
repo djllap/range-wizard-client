@@ -1,0 +1,29 @@
+.chart-name-input {
+  flex: 1;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: none;
+  background-color: inherit;
+  font-family: inherit;
+  font-size: inherit
+}
+
+.chart-name-label {
+  font-weight: bold;
+}
+
+.submit-chart-btn {
+  background-color: #59BAB7;
+  font-size: 1.3rem;
+  min-width: 8rem;
+}
+
+.cancel-form-btn {
+  background-color: #DA4539;
+  min-width: 8rem;
+}
+
+.chart-btns-container {
+  display: flex;
+  justify-content: space-around;
+}

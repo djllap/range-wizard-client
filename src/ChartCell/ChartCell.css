@@ -1,0 +1,8 @@
+.chart-cell {
+  display: flex;
+  height: 1.8rem;
+  width: 1.8rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(100, 100, 100, 0.1)
+}
