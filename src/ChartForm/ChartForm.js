@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Chart from '../Chart/Chart';
 import RangeForm from '../RangeForm/RangeForm';
+import ErrorBox from '../ErrorBox/ErrorBox';
 import config from '../config';
 import './ChartForm.css'
 
@@ -11,7 +12,8 @@ class ChartForm extends Component {
     newRangeName: '',
     currentRange: undefined,
     mouseDown: false,
-    addingToRange: true
+    addingToRange: true,
+    error: undefined
   }
 
   componentDidMount() {
@@ -67,7 +69,14 @@ class ChartForm extends Component {
       },
       body: JSON.stringify(fields)
     })
-    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      return (res.ok ? res : Promise.reject(res))
+    })
+    .then(res => {
+      console.log(res);
+      return res.json();
+    })
     .then(chart => {
       this.props.selectChart(chart);
       chartMethod(chart);
@@ -88,6 +97,7 @@ class ChartForm extends Component {
           body: JSON.stringify(rangesToPost)
         })
         .then(res => res.json())
+        .then(res => (res.ok ? res : Promise.reject(res)))
         .then(ranges => {
           this.props.addRanges(ranges);
         });
@@ -108,6 +118,7 @@ class ChartForm extends Component {
               body: JSON.stringify(fields)
             })
             .then(res => res.json())
+            .then(res => (res.ok ? res : Promise.reject(res)))
           })
         )
         .then(res => {
@@ -115,10 +126,15 @@ class ChartForm extends Component {
           this.props.editRanges(ranges);
         });
       }
-    }) 
-    this.props.toggleEditing();
+    })
+    .then(() => {
+      this.props.toggleEditing();
+    })
+    .catch(e => {
+      console.log(e);
+      this.setState({error: e.statusText});
+    })
   }
-
 
   clearForm = () => {
     this.setState({
@@ -181,6 +197,10 @@ class ChartForm extends Component {
     if (this.props.chart.id) {
       title = `Editing ${this.state.chart.chart_name}`
     }
+    const errorBox = (this.state.error) ? 
+      <ErrorBox error={this.state.error} setError={(e) => this.setState({error: e})} />
+      :
+      '';
 
     return (
       <div className="chart-view">
@@ -195,6 +215,7 @@ class ChartForm extends Component {
           setAddingToRange={this.setAddingToRange}
           addingToRange={this.state.addingToRange}
         />
+        {errorBox}
         <form className="chart-name-form">
           <label 
             className="chart-name-label"
