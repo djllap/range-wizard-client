@@ -9,22 +9,17 @@
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-  font-size: 0.8rem;
+  font-size: 1rem;
   background-color: lightgrey;
 }
 
 .chart-row {
   display: flex;
   flex-direction: row;
-  height: 1.8rem;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 540px) {
   .chart-container {
-    font-size: calc((100vw - 1rem) / 13 * 0.44)
-  }
-
-  .chart-row {
-    height: calc((100vw - 1rem) / 13 );
+    font-size: calc((100vw - 1rem) / 16 * 0.55)
   }
 }

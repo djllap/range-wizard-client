@@ -1,0 +1,13 @@
+.landing-container {
+  width: 100%;
+  background-color: #F3E5E5;
+  min-height: calc(100vh - 2.4rem);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-title {
+  align-self: center;
+  margin-bottom: 0;
+}

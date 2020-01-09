@@ -133,14 +133,14 @@ class App extends Component {
           <Route path="/"
             component={Header}
           />
-          <div className="big-container">
-            <Route path="/" exact
-              component={Landing}
-            />
+          <Route path="/" exact
+            component={Landing}
+          />
+          {/* <div className="big-container"> */}
             <Route path="/charts" exact
               render={(props) => chartComponent}
             />
-          </div>
+          {/* </div> */}
           
         </BrowserRouter>
       </main>

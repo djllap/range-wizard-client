@@ -1,22 +1,27 @@
 .legend-color {
-  min-width: 1rem;
-  min-height: 1rem;
-  max-width: 1rem;
-  max-height: 1rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  max-width: 1.5rem;
+  max-height: 1.5rem;
   display: flex;
   margin-right: 0.5rem;
+  border: 1px solid rgb(169, 169, 169);
 }
 
 .chart-legend {
-  padding: 1rem;
+  /* padding: 1rem; */
   background-color: grey;
-  flex: 1;
+  flex: 2;
   border-radius: 0.5rem;
   margin-right: 1rem;
 }
 
 .legend-row {
   display: flex;
-  margin-bottom: 0.25rem;
   align-items: center;
+  padding: 0.5rem;
+}
+
+.legend-title {
+  margin: 1rem 0 1rem 0.5rem;
 }

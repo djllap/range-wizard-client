@@ -9,7 +9,6 @@ class ChartForm extends Component {
   state = {
     chart: {id: undefined, chart_name: ''},
     ranges: [],
-    newRangeName: '',
     currentRange: undefined,
     mouseDown: false,
     addingToRange: true,
@@ -40,10 +39,6 @@ class ChartForm extends Component {
         id: this.state.chart.id
       } 
     });
-  }
-
-  handleRangeNameChange = (e) => {
-    this.setState({newRangeName: e.target.value});
   }
 
   handleNewChartSubmit = (e) => {
@@ -150,7 +145,6 @@ class ChartForm extends Component {
     this.setState({
       chart: {chart_name: ''},
       ranges: [],
-      newRangeName: '',
       currentRange: undefined
     })
   }
@@ -164,12 +158,12 @@ class ChartForm extends Component {
           ...this.state.ranges, 
           {
             chart_id: this.state.chartId,
-            color: '',
+            color: 'rgb(255, 51, 51)',
             coords: [],
-            range_name: this.state.newRangeName
+            range_name: 'Range name'
           }
         ],
-        newRangeName: ''
+
       }
     )
   }
@@ -221,59 +215,61 @@ class ChartForm extends Component {
       '';
 
     return (
-      <div className="chart-view">
-        <h2>{title}</h2>
-        <Chart 
-          ranges={this.state.ranges}
-          updateRanges={this.updateRanges}
-          currentRange={this.state.currentRange}
-          handleChartMouseDown={this.handleChartMouseDown}
-          handleChartMouseUp={this.handleChartMouseUp}
-          mouseDown={this.state.mouseDown}
-          setAddingToRange={this.setAddingToRange}
-          addingToRange={this.state.addingToRange}
-        />
-        {errorBox}
-        <form className="chart-name-form">
-          <label 
-            className="chart-name-label"
-            htmlFor="chart-name-input"
-          >
-            Chart Name: 
-          </label>
-          <input
-            className="chart-name-input"
-            type="text"
-            size="0"
-            id="chart-name-input"
-            placeholder='Chart Name'
-            value={this.state.chart.chart_name}
-            onChange={this.handleChartNameChange}
+      <div className="big-container">
+        <div className="chart-view">
+          <h2>{title}</h2>
+          <Chart 
+            ranges={this.state.ranges}
+            updateRanges={this.updateRanges}
+            currentRange={this.state.currentRange}
+            handleChartMouseDown={this.handleChartMouseDown}
+            handleChartMouseUp={this.handleChartMouseUp}
+            mouseDown={this.state.mouseDown}
+            setAddingToRange={this.setAddingToRange}
+            addingToRange={this.state.addingToRange}
           />
-        </form>
-        <RangeForm
-          ranges={this.state.ranges}
-          newRangeName={this.state.newRangeName}
-          handleRangeNameChange={this.handleRangeNameChange}
-          createRange={this.createRange}
-          updateRange={this.updateRange}
-          deleteRange={this.deleteRange}
-          setRange={this.setRange}
-          currentRange={this.state.currentRange}
-        />
-        <div className="chart-btns-container">
-          <button
-            className="cancel-form-btn chart-btn"
-            onClick={this.props.toggleEditing}
-          > 
-            Cancel
-          </button>
-          <button
-            className="submit-chart-btn chart-btn"
-            onClick={this.handleNewChartSubmit}
-          >
-            Submit
-          </button>
+          {errorBox}
+          <form className="chart-name-form">
+            <input
+              className="chart-name-input"
+              type="text"
+              size="0"
+              id="chart-name-input"
+              placeholder='Chart Name'
+              value={this.state.chart.chart_name}
+              onChange={this.handleChartNameChange}
+            />
+          </form>
+          <div className="chart-toolbar">
+            <RangeForm
+              ranges={this.state.ranges}
+              createRange={this.createRange}
+              updateRange={this.updateRange}
+              deleteRange={this.deleteRange}
+              setRange={this.setRange}
+              currentRange={this.state.currentRange}
+            />
+            <div className="button-col">
+              <button 
+                className="chart-btn"
+                onClick={this.createRange}
+              >
+                Add Range
+              </button>
+              <button
+                className="cancel-form-btn chart-btn"
+                onClick={this.props.toggleEditing}
+              > 
+                Cancel
+              </button>
+              <button
+                className="submit-chart-btn chart-btn"
+                onClick={this.handleNewChartSubmit}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     );

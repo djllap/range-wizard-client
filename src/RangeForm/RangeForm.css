@@ -2,17 +2,17 @@
   background-color: grey;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 2;
   border-radius: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-right: 1rem;
 }
 
 .range-form-title {
-  margin-left: 0.5rem;
+  margin: 1rem 0 1rem 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .range-row {
-  flex: 1;
   display: flex;
   flex-direction: row;
   padding: 0.5rem;
@@ -22,29 +22,48 @@
   background-color: #863271;
 }
 
-.range-name-input {
+.range-name-row-input {
+  background-color: inherit;
+  border: none;
+  padding: 0.2rem;
+  color: rgba(255, 255, 255, 0.8);
   flex: 1;
   margin-right: 0.5rem;
 }
 
-.range-name-row-input {
-  background-color: grey;
-  border: none;
-  padding: 0.2rem;
-  color: white;
-  flex: 1;
-  margin-right: 0.5rem;
+.range-name-row-input:placeholder-shown {
+  color: rgba(255, 255, 255, 0.6)
+}
+
+input.range-name-row-input, [contenteditable] {
+  caret-color: white;
 }
 
 .color-select {
   width: 1.5rem;
+  height: 1.5rem;
   margin-right: 0.5rem;
 }
 
-.new-range-form {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  justify-content: space-between;
+.material-icons.del-range-btn {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: default;
 }
 
+.material-icons.del-range-btn:hover {
+  color: #DA4539;
+}
+ 
+select.color-select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+select.color-select::-ms-expand {
+  display: none;
+}
+
+.range-row:last-child.selected {
+  border-radius: 0 0 0.5rem 0.5rem;
+}

@@ -1,13 +1,14 @@
 .chart-cell {
   display: flex;
-  height: 1.8rem;
-  width: 1.8rem;
+  height: 2.5rem;
+  width: 2.5rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(100, 100, 100, 0.1)
+  border: 1px solid rgba(100, 100, 100, 0.1);
+  padding-top: 0.1rem;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 540px) {
   .chart-cell {
     /* height: 1.4rem; */
     /* width: 1.4rem; */

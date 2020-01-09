@@ -46,11 +46,13 @@ export default function RangeBtns(props) {
         backgroundColor: range.color
       }}
     >
+      {/*
       <option 
         value={undefined}
+        style={{backgroundColor: 'inherit'}}
       >
-        Pick color
-      </option>
+        {' '}
+      </option> */}
       {Object.entries(colors).map(entry => {
         const name = entry[0];
         const color = entry[1];
@@ -73,27 +75,6 @@ export default function RangeBtns(props) {
   return (
     <div className="range-form">
       <h3 className="range-form-title">Ranges</h3>
-      <div className="range-row">
-        <form
-          className="new-range-form"
-          onSubmit={props.createRange}
-        >  
-          <input 
-            className="range-name-input"
-            type="text"
-            id="range-name-input"
-            size="5"
-            placeholder='New Range Name'
-            value={props.newRangeName}
-            onChange={props.handleRangeNameChange}
-          />
-          <button 
-            className="new-range-btn"
-          >
-            Create
-          </button>
-        </form>
-      </div>
       {props.ranges.map((range, i) => (
         <div 
           className={`range-row ${props.currentRange === i ? 'selected' : ''}`}
@@ -108,12 +89,14 @@ export default function RangeBtns(props) {
             value={range.range_name}
             onChange={(e) => updateRangeName(range, e)}
           />
-          <button 
-            className="del-range-btn"
+          <i 
+            className="del-range-btn material-icons"
             onClick={(e) => deleteRange(i, e)}
           >
-            Delete
-          </button>
+            {/* <i className="material-icons delete-icon"> */}
+              delete
+            {/* </i> */}
+          </i>
         </div>
       ))}
     </div>

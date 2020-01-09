@@ -13,28 +13,30 @@ export default function ChartView(props) {
   const errorBox = (props.error) ? <ErrorBox error={props.error} setError={props.setError}/> : '';
 
   return (
-    <div className="chart-view">
-      <h2>CHARTS: {chartName}</h2>
-      {errorBox}
-      <Chart 
-        ranges={props.ranges}
-      />
-      <ChartSelect 
-        charts={props.charts} 
-        setChart={props.selectChart}
-        currentChartId={props.currentChart.id}
-      />
-      <div className="chart-toolbar">
-        <ChartLegend
+    <div className="big-container">
+      <div className="chart-view">
+        <h2>CHARTS: {chartName}</h2>
+        {errorBox}
+        <Chart 
           ranges={props.ranges}
         />
-        <ChartBtns
-          chartId={props.currentChart.id}
+        <ChartSelect 
+          charts={props.charts} 
           setChart={props.selectChart}
-          deleteChart={props.deleteChart}
-          charts={props.charts}
-          toggleEditing={props.toggleEditing}
+          currentChartId={props.currentChart.id}
         />
+        <div className="chart-toolbar">
+          <ChartLegend
+            ranges={props.ranges}
+          />
+          <ChartBtns
+            chartId={props.currentChart.id}
+            setChart={props.selectChart}
+            deleteChart={props.deleteChart}
+            charts={props.charts}
+            toggleEditing={props.toggleEditing}
+          />
+        </div>
       </div>
     </div>
   );
