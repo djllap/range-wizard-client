@@ -24,9 +24,6 @@ export default function Chart(props) {
       className="chart-container"
       onMouseDown={props.handleChartMouseDown}
       onMouseUp={props.handleChartMouseUp}
-      onTouchStart={props.handleChartMouseDown}
-      onTouchEnd={props.handleChartMouseUp}
-      onTouchCancel={props.handleChartMouseUp}
     >
       {matrix.map((row, x) => 
         <div className="chart-row" key={x}>

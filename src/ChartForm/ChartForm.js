@@ -13,7 +13,8 @@ class ChartForm extends Component {
     currentRange: undefined,
     mouseDown: false,
     addingToRange: true,
-    error: undefined
+    error: undefined,
+    idsToDelete: []
   }
 
   componentDidMount() {
@@ -78,6 +79,7 @@ class ChartForm extends Component {
     .then(chart => {
       this.props.selectChart(chart);
       chartMethod(chart);
+      const idsToDelete = this.state.idsToDelete;
       const rangesToPatch = this.state.ranges.filter(range => range.id)
       const rangesToPost = this.state.ranges.filter(range => !range.id)
       .map(range => {
@@ -123,6 +125,17 @@ class ChartForm extends Component {
           const ranges = res.map(e => e[0])
           this.props.editRanges(ranges);
         });
+      }
+
+      if (idsToDelete.length > 0) {
+        idsToDelete.forEach(id => {
+          fetch(`${config.baseURL}/ranges/${id}`, {
+            method: 'DELETE'
+          })
+          .then(res => {
+            this.props.deleteRange(id);
+          })
+        })
       }
     })
     .then(() => {
@@ -172,9 +185,17 @@ class ChartForm extends Component {
   }
 
   deleteRange = (index) => {
-    this.setState({
-      ranges: this.state.ranges.filter((range, i) => index !== i)
-    });
+    const idToDelete = this.state.ranges[index].id;
+    if (idToDelete) {
+      this.setState({
+        ranges: this.state.ranges.filter((range, i) => index !== i),
+        idsToDelete: [...this.state.idsToDelete, idToDelete]
+      });
+    } else {
+      this.setState({
+        ranges: this.state.ranges.filter((range, i) => index !== i),
+      });
+    }
   }
 
   setRange = (index) => {

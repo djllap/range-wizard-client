@@ -56,6 +56,14 @@ class App extends Component {
     this.setState({charts: charts})
   }
 
+  deleteChart = (id) => {
+    const filteredCharts = this.state.charts.filter(chart => chart.id !== id);
+    const chartIndex = this.state.charts.findIndex(chart => chart.id === id);
+    const index = (chartIndex === 0) ? 1 : chartIndex - 1;
+    this.setState({charts: filteredCharts, currentChart: this.state.charts[index]});
+
+  }
+
   addRanges = (newRanges) => {
     this.setState({ranges: [...this.state.ranges, ...newRanges]});
   }
@@ -73,12 +81,9 @@ class App extends Component {
     this.setState({ranges: ranges})
   }
 
-  deleteChart = (id) => {
-    const filteredCharts = this.state.charts.filter(chart => chart.id !== id);
-    const chartIndex = this.state.charts.findIndex(chart => chart.id === id);
-    const index = (chartIndex === 0) ? 1 : chartIndex - 1;
-    this.setState({charts: filteredCharts, currentChart: this.state.charts[index]});
-
+  deleteRange = (id) => {
+    const filteredRanges = this.state.ranges.filter(range => range.id !== id);
+    this.setState({ranges: filteredRanges});
   }
 
   toggleEditing = () => {
@@ -106,6 +111,7 @@ class App extends Component {
         editChart={this.editChart}
         addRanges={this.addRanges}
         editRanges={this.editRanges}
+        deleteRange={this.deleteRange}
         ranges={currentRanges}
         toggleEditing={this.toggleEditing}
       />

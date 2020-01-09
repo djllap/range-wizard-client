@@ -104,7 +104,7 @@ export default function RangeBtns(props) {
           <input
             className="range-name-row-input"
             type="text"
-            size="0"
+            size="5"
             value={range.range_name}
             onChange={(e) => updateRangeName(range, e)}
           />

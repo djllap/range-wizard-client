@@ -9,7 +9,9 @@
 
 @media (max-width: 400px) {
   .chart-cell {
-    height: 1.4rem;
-    width: 1.4rem;
+    /* height: 1.4rem; */
+    /* width: 1.4rem; */
+    height: calc((100vw - 1rem) / 13 );
+    width: calc((100vw - 1rem) / 13 );
   }
 }
