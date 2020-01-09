@@ -21,10 +21,10 @@
 
 @media (max-width: 400px) {
   .chart-container {
-    font-size: 0.7rem;
+    font-size: calc((100vw - 1rem) / 13 * 0.44)
   }
 
   .chart-row {
-    height: 1.4rem;
+    height: calc((100vw - 1rem) / 13 );
   }
 }
