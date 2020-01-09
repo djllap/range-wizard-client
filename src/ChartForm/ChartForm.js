@@ -70,11 +70,9 @@ class ChartForm extends Component {
       body: JSON.stringify(fields)
     })
     .then(res => {
-      console.log(res);
       return (res.ok ? res : Promise.reject(res))
     })
     .then(res => {
-      console.log(res);
       return res.json();
     })
     .then(chart => {
@@ -96,8 +94,8 @@ class ChartForm extends Component {
           },
           body: JSON.stringify(rangesToPost)
         })
+        // .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json())
-        .then(res => (res.ok ? res : Promise.reject(res)))
         .then(ranges => {
           this.props.addRanges(ranges);
         });
@@ -117,8 +115,8 @@ class ChartForm extends Component {
               },
               body: JSON.stringify(fields)
             })
+            // .then(res => (res.ok ? res : Promise.reject(res)))
             .then(res => res.json())
-            .then(res => (res.ok ? res : Promise.reject(res)))
           })
         )
         .then(res => {
@@ -131,7 +129,6 @@ class ChartForm extends Component {
       this.props.toggleEditing();
     })
     .catch(e => {
-      console.log(e);
       this.setState({error: e.statusText});
     })
   }

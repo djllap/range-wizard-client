@@ -1,10 +1,11 @@
 header {
-  min-height: 2rem;
+  height: 2.4rem;
   /* background-color: #59437B; */
   background-color: rgb(80, 80, 80);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-width: 100%;
 }
 
 .app-icon {

@@ -23,7 +23,7 @@
 }
 
 .range-name-input {
-  width: auto;
+  flex: 1;
   margin-right: 0.5rem;
 }
 

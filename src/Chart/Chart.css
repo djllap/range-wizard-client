@@ -18,3 +18,13 @@
   flex-direction: row;
   height: 1.8rem;
 }
+
+@media (max-width: 400px) {
+  .chart-container {
+    font-size: 0.7rem;
+  }
+
+  .chart-row {
+    height: 1.4rem;
+  }
+}

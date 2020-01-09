@@ -78,18 +78,15 @@ export default function RangeBtns(props) {
           className="new-range-form"
           onSubmit={props.createRange}
         >  
-          <span>
-            <label htmlFor="range-name-input">Range Name: </label>
-            <input 
-              className="range-name-input"
-              type="text"
-              size="15"
-              id="range-name-input"
-              placeholder='New Range Name'
-              value={props.newRangeName}
-              onChange={props.handleRangeNameChange}
-            />
-          </span>
+          <input 
+            className="range-name-input"
+            type="text"
+            id="range-name-input"
+            size="5"
+            placeholder='New Range Name'
+            value={props.newRangeName}
+            onChange={props.handleRangeNameChange}
+          />
           <button 
             className="new-range-btn"
           >
@@ -107,6 +104,7 @@ export default function RangeBtns(props) {
           <input
             className="range-name-row-input"
             type="text"
+            size="5"
             value={range.range_name}
             onChange={(e) => updateRangeName(range, e)}
           />

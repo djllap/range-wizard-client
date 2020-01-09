@@ -6,3 +6,10 @@
   justify-content: center;
   border: 1px solid rgba(100, 100, 100, 0.1)
 }
+
+@media (max-width: 400px) {
+  .chart-cell {
+    height: 1.4rem;
+    width: 1.4rem;
+  }
+}
