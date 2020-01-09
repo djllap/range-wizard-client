@@ -1,15 +1,16 @@
 .chart-name-input {
   flex: 1;
   padding: 0.5rem;
-  margin-top: 0.5rem;
   border: none;
   background-color: inherit;
   font-family: inherit;
-  font-size: inherit
+  font-size: inherit;
+  max-width: 12rem;
 }
 
 .chart-name-label {
   font-weight: bold;
+  padding: 0.5rem 0 0.5rem 0;
 }
 
 .submit-chart-btn {
@@ -26,4 +27,11 @@
 .chart-btns-container {
   display: flex;
   justify-content: space-around;
+}
+
+.chart-name-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.5rem;
 }

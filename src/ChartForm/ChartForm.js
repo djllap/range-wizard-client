@@ -223,6 +223,7 @@ class ChartForm extends Component {
           <input
             className="chart-name-input"
             type="text"
+            size="0"
             id="chart-name-input"
             placeholder='Chart Name'
             value={this.state.chart.chart_name}

@@ -65,6 +65,8 @@ export default function ChartCell(props) {
       style={{backgroundColor: props.color}}
       onMouseOver={hoverEvent}
       onMouseDown={mouseDownEvent}
+      onTouchStart={mouseDownEvent}
+      onTouchMove={hoverEvent}
     >
       {props.hand}
     </span>
