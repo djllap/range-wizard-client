@@ -2,6 +2,7 @@
 A tool to help you organize your many poker ranges into clear, easy to reference charts
 
 Hosted live at [range-wizard.now.sh/](https://range-wizard.now.sh/)
+
 Source code at [github.com/djllap/range-wizard-client](https://github.com/djllap/range-wizard-client)
 
 ## What is it?
@@ -22,7 +23,7 @@ Range Wizard allows you to organize related ranges into a single, color-coded ch
 
 To select which of your charts you wish to see, select the chart from the dropdown menu immediately below the chart.
 
-![range select](https://github.com/djllap/range-wizard-client/blob/master/src/Landing/select-chart.gif?raw=true =300x)
+![range select](src\Landing\select-chart.gif =300x)
 
 ### Edit Mode
 To create or edit a chart, you must first enter the editing mode, by clicking on the appropriate button. Once in edit mode, you can edit the chart and range names, add or remove ranges, and select which hands belong in each range.
