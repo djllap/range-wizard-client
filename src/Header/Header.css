@@ -22,11 +22,15 @@ header {
   cursor: pointer;
 }
 
-.nav-tutorial {
+.nav {
   margin-right: 1rem;
 }
 
-a.nav-tutorial {
+a.nav {
   text-decoration: none;
   color: #DDDDDD;
+}
+
+a.nav:hover {
+  color: rgb(89, 186, 183);
 }

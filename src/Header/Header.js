@@ -14,9 +14,17 @@ export default function Header(props) {
           onClick={() => props.history.push('/')}
         />
       </span>
-      <Link className="nav-tutorial" to="/">
-        Tutorial
-      </Link>
+      <div>
+        <a className="nav" href="https://github.com/djllap/range-wizard-client" target="blank">
+          Code
+        </a>
+        <Link className="nav nav-charts" to="/charts">
+          Charts
+        </Link>
+        <Link className="nav nav-tutorial" to="/">
+          Tutorial
+        </Link>
+      </div>
     </header>
   );
 }

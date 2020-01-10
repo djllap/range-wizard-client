@@ -14,7 +14,7 @@ Range wizard allows color coded ranges to be grouped and displayed on a single c
 Range Wizard has an Express/Node backend API, with an independent React front end with React-Router. Styling is done with vanilla CSS only.
 
 ## API Documentation
-[Range Wizard API](https://github.com/djllap/range-wizard-api/blob/master/README.md)
+[Range Wizard API](https://documenter.getpostman.com/view/9339504/SWLiY5MQ?version=latest)
 
 ## How it Works
 Range Wizard allows you to organize related ranges into a single, color-coded chart. The interface is simple and intuitive, so even those without much experience with computers can use Range Wizard without difficulty.
