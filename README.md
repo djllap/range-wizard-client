@@ -23,7 +23,7 @@ Range Wizard allows you to organize related ranges into a single, color-coded ch
 
 To select which of your charts you wish to see, select the chart from the dropdown menu immediately below the chart.
 
-![range select](src\Landing\select-chart.gif =300x)
+<img src="/src/Landing/select-chart.gif" alt="select chart" width="300">
 
 ### Edit Mode
 To create or edit a chart, you must first enter the editing mode, by clicking on the appropriate button. Once in edit mode, you can edit the chart and range names, add or remove ranges, and select which hands belong in each range.
@@ -32,7 +32,7 @@ To edit either the chart name or a range name, simply click on the name you wish
 
 Clicking anywhere on a range will select that range as the current range, indicated by the purple color.
 
-![edit mode](https://github.com/djllap/range-wizard-client/blob/master/src/Landing/edit-mode.gif?raw=true =300x)
+<img src="/src/Landing/edit-mode.gif" alt="edit mode" width="300">
 
 ### Chaging Range Colors and Hands
 
@@ -42,7 +42,7 @@ To set the hands that belong in the selected range, you can click the appropriat
 
 Note: Each hand can only be present in one range per chart. Adding a hand to a range will remove that hand from all other ranges.
 
-![edit color and hands](https://github.com/djllap/range-wizard-client/blob/master/src/Landing/edit-color-and-hands.gif?raw=true =300x)
+<img src="/src/Landing/edit-color-and-hands.gif" alt="edit color and hands" width="300">
 
 ### Adding and Deleting Ranges
 
@@ -52,7 +52,7 @@ To delete a range click on the trash can button on the right of the range row. D
 
 Note: if you accidentally delete a range, you can click the cancel button to eliminate any unsubmitted changes to your chart.
 
-![add and delete ranges](https://github.com/djllap/range-wizard-client/blob/master/src/Landing/add-and-delete-ranges.gif?raw=true =300x)
+<img src="/src/Landing/add-and-delete-ranges.gif" alt="add and delete ranges" width="300">
 
 ### Submitting Changes
 
@@ -64,4 +64,4 @@ In the case you wish to delete an entire chart, including all of its ranges, you
 
 Note: This will permanently delete your chart and all of its ranges. take this action with care.
 
-![delete chart](https://github.com/djllap/range-wizard-client/blob/master/src/Landing/delete-chart.gif?raw=true =300x)
+<img src="/src/Landing/delete-chart.gif" alt="delete chart" width="300">
