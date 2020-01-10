@@ -42,6 +42,19 @@ class ChartForm extends Component {
   }
 
   handleNewChartSubmit = (e) => {
+    if (!this.state.chart.chart_name) {
+      this.setState({error: 'Chart must have a name'});
+      return;
+    }
+    let error = false;
+    this.state.ranges.forEach(range => {
+      if (!range.range_name) {
+        this.setState({error: 'All ranges must have a name'});
+        error = true;
+      }
+    })
+    if (error) return;
+    
     let method;
     let idURL;
     let chartMethod;
