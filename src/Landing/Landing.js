@@ -100,13 +100,14 @@ export default function Landing(props) {
           <div className="p-with-img">
             <div>
               <p className="section-para">
-                To add a range, you must be in edit mode. Click on the add range button, and a new default range will appear. You can now edit this range just like any other, chaging its name, color and hands.
+                To add a range, you must be in edit mode. Click on the add range button, and a new default range will appear. You can now edit this range just like any other, changing its name, color and hands.
               </p>
               <p className="section-para">
                 To delete a range click on the trash can button on the right of the range row. Deleting a range will automatically remove its color from the chart.
               </p>
               <p className="note">
-                Note: if you accidetially delete a range, you can click the cancel button to eliminate any unsubmitted changes to your chart.
+                Note: if you accidentally delete a range, you can click the cancel button to eliminate any unsubmitted changes to your chart.
+
               </p>
             </div>
             <img 
@@ -117,10 +118,10 @@ export default function Landing(props) {
           </div>
 
           <h3 className="section-subtitle">
-            Submiting Changes
+            Submitting Changes
           </h3>
           <p className="section-para">
-            No changes you make in edit mode become permenant until you press the submit button. To undo any changes you have made, you can back out of the edit mode without commiting by pressing cancel.
+            No changes you make in edit mode become permanent until you press the submit button. To undo any changes you have made, you can back out of the edit mode without committing by pressing cancel.
           </p>
 
           <h3 className="section-subtitle">
@@ -132,7 +133,7 @@ export default function Landing(props) {
                 In the case you wish to delete an entire chart, including all of its ranges, you must be in view mode, not edit mode. From here, all you have to do is select the chart you wish to delete from the dropdown, and click the delete button.
               </p>
               <p className="note">
-                Note: This will permenantly delete your chart and all of its ranges. take this action with care.
+                Note: This will permanently delete your chart and all of its ranges. take this action with care.
               </p>
             </div>
             <img 
