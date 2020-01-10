@@ -14,5 +14,10 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(rgba(80,0,0,0.6), rgba(80,0,0,0.7)), url("./background.jpg")
+  background: linear-gradient(rgba(80,0,0,0.6), rgba(80,0,0,0.7)), url("./background.jpg");
+  overflow: visible;
+}
+
+.root {
+  overflow: visible;
 }
