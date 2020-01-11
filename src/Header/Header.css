@@ -4,12 +4,12 @@ header {
   background-color: rgb(80, 80, 80);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   min-width: 100%;
+  padding-left: 0.5rem;
 }
 
 .app-icon {
-  padding: 0.25rem 0 0.25rem 0.5rem;
+  padding: 0.25rem 0 0.25rem 0;
   height: 2.5rem;
 }
 
@@ -22,10 +22,6 @@ header {
   cursor: pointer;
 }
 
-.nav {
-  margin-right: 1rem;
-}
-
 a.nav {
   text-decoration: none;
   color: #DDDDDD;
@@ -33,4 +29,42 @@ a.nav {
 
 a.nav:hover {
   color: rgb(89, 186, 183);
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+}
+
+li {
+  list-style-type: none;
+}
+
+.nav-list {
+  position: absolute;
+  right: 0;
+  top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  background-color: rgb(80, 80, 80);
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  justify-items: left;
+}
+
+.nav-item {
+  padding: 0.25rem 0.5rem 0.25rem 0;
+}
+
+.material-icons.menu-icon {
+  color: #DDDDDD;
+  padding: 0;
+  margin:0;
+  position: absolute;
+  right: 0.5rem;
+  cursor: default;
+}
+
+.hidden {
+  display: none;
 }
