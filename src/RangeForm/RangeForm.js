@@ -1,7 +1,7 @@
 import React from 'react';
 import './RangeForm.css';
 
-export default function RangeBtns(props) {
+export default function RangeForm(props) {
   const colors = {
     red: '#ff3333', 
     orange: '#ff9933', 
