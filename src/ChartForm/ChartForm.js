@@ -1,39 +1,125 @@
 import React, { useState, useEffect } from 'react';
 import Chart from '../Chart/Chart';
+import ChartName from '../ChartName';
 import RangeForm from '../RangeForm/RangeForm';
+import ChartLegend from '../ChartLegend';
 import ErrorBox from '../ErrorBox/ErrorBox';
 import config from '../config';
 import './ChartForm.css'
 
 function ChartForm(props) {
-  const [chart, setChart] = useState(props.chart);
-  const [ranges, setRanges] = useState(props.ranges);
+  const [allCharts, setAllCharts] = useState([]);
+  const [allRanges, setAllRanges] = useState([]);
+  const [editing, setEditing] = useState(false);
+  const [currentChart, setCurrentChart] = useState({id: ''});
+  const [currentRanges, setCurrentRanges] = useState([]);
   const [currentRangeIndex, setCurrentRangeIndex] = useState((props.ranges.length > 0) ? 0 : undefined);
   const [mouseDown, setMouseDown] = useState(false);
   const [addingToRange, setAddingToRange] = useState(true);
   const [error, setError] = useState(undefined);
   const [idsToDelete, setIdsToDelete] = useState([]);
 
-  // useEffect(() => {
-  //   if (props.chart) setChart(props.chart);
-  //   if (props.ranges) setRanges(props.ranges);
-  //   setCurrentRangeIndex((props.ranges.length > 0) ? 0 : undefined)
-  // }, [props.chart, props.ranges])
+  useEffect(() => { // Get charts and ranges from api on mount   
+    fetch(`${config.baseURL}/charts`)
+      .then(res => res.json())
+      .then(charts => {
+        if (charts.length > 0) {
+          setAllCharts(charts);
+          setCurrentChart(charts[0])
+        }
+      })
+      .catch(e => {
+        const error = Object.entries(e).length ? e : 'Failed to load charts';
+        setError(error)
+      });
 
-  const handleChartNameChange = (e) => {
-    setChart({
+      fetch(`${config.baseURL}/ranges`)
+        .then(res => res.json())
+        .then(ranges => {
+          setAllRanges(ranges)
+        })
+        .catch(e => {
+          const error = Object.entries(e).length ? e : 'Failed to load ranges';
+          setError(error)
+        });
+      
+  }, []);
+
+//    _____ _        _         ______                _   _                 
+//   / ____| |      | |       |  ____|              | | (_)                
+//  | (___ | |_ __ _| |_ ___  | |__ _   _ _ __   ___| |_ _  ___  _ __  ___ 
+//   \___ \| __/ _` | __/ _ \ |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+//   ____) | || (_| | ||  __/ | |  | |_| | | | | (__| |_| | (_) | | | \__ \
+//  |_____/ \__\__,_|\__\___| |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+
+  const addChart = (chart) => {
+    setAllCharts([...allCharts, chart]);
+  }
+
+  const editChart = (chart) => {
+    setAllCharts(
+      [...allCharts].map(c => {
+        return (c.id === chart.id) ? chart : c;
+      })
+    );
+  }
+
+  const deleteChart = (id) => {
+    const filteredCharts = allCharts.filter(chart => chart.id !== id);
+    const chartIndex = allCharts.findIndex(chart => chart.id === id);
+    const index = (chartIndex === 0) ? 1 : chartIndex - 1;
+    setCurrentChart(allCharts[index]);
+    setAllCharts(filteredCharts);
+  }
+
+  const addRanges = (newRanges) => {
+    setAllRanges([...allRanges, ...newRanges]);
+  }
+
+  const editRanges = (rangesToEdit) => {
+    const rangesToEditIds = rangesToEdit.map(range => range.id);
+    const editedRanges = allRanges.map(range => {
+      return rangesToEditIds.includes(range.id) ?
+        rangesToEdit.find(r => r.id === range.id )
+        :
+        range;
+    });
+
+    setAllRanges(editedRanges);
+  }
+
+  const deleteRange = (id) => {
+    const filteredRanges = allRanges.filter(range => range.id !== id);
+    setAllRanges(filteredRanges);
+  }
+
+  const toggleEditing = () => {
+    setEditing(!editing);
+    if (!currentChart.id && allCharts.length > 0) {
+      setCurrentChart(allCharts[0]);
+    }
+  }
+
+//   _____                      _____                 _   _                 
+//  |  ______  _ __ _ __ ___   |  ____   _ _ __   ___| |_(_) ___  _ __  ___ 
+//  | |_ / _ \| '__| '_ ` _ \  | |_ | | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+//  |  _| (_) | |  | | | | | | |  _|| |_| | | | | (__| |_| | (_) | | | \__ \
+//  |_|  \___/|_|  |_| |_| |_| |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+
+  const handleChartNameChange = (e) => { // Controls chart name input
+    setCurrentChart({
         chart_name: e.target.value,
-        id: chart.id
+        id: currentChart.id
       });
   }
 
-  const handleNewChartSubmit = (e) => {
-    if (!chart.chart_name) {
+  const handleFormSubmit = (e) => {
+    if (!currentChart.chart_name) {
       setError('Chart must have a name');
       return;
     }
     let error = false;
-    ranges.forEach(range => {
+    currentRanges.forEach(range => {
       if (!range.range_name) {
         setError('All ranges must have a name');
         error = true;
@@ -44,16 +130,16 @@ function ChartForm(props) {
     let method;
     let idURL;
     let chartMethod;
-    const fields = { chart_name: chart.chart_name };
+    const fields = { chart_name: currentChart.chart_name };
 
-    if (chart.id) {
+    if (currentChart.id) {
       method = 'PATCH';
-      idURL = `/${chart.id}`;
-      chartMethod = props.editChart;
+      idURL = `/${currentChart.id}`;
+      chartMethod = editChart;
     } else {
       method = 'POST';
       idURL = '';
-      chartMethod = props.addChart;
+      chartMethod = addChart;
     }
 
     fetch(`${config.baseURL}/charts${idURL}`, {
@@ -71,10 +157,10 @@ function ChartForm(props) {
       return res.json();
     })
     .then(chart => {
-      props.selectChart(chart);
+      setCurrentChart(chart);
       chartMethod(chart);
-      const rangesToPatch = ranges.filter(range => range.id)
-      const rangesToPost = ranges.filter(range => !range.id)
+      const rangesToPatch = currentRanges.filter(range => range.id)
+      const rangesToPost = currentRanges.filter(range => !range.id)
       .map(range => {
         range.chart_id = chart.id;
         return range;
@@ -92,7 +178,7 @@ function ChartForm(props) {
         // .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json())
         .then(ranges => {
-          props.addRanges(ranges);
+          addRanges(ranges);
         });
       }
 
@@ -116,7 +202,7 @@ function ChartForm(props) {
         )
         .then(res => {
           const ranges = res.map(e => e[0])
-          props.editRanges(ranges);
+          editRanges(ranges);
         });
       }
 
@@ -126,45 +212,45 @@ function ChartForm(props) {
             method: 'DELETE'
           })
           .then(res => {
-            props.deleteRange(id);
+            deleteRange(id);
           })
         })
       }
     })
     .then(() => {
-      props.toggleEditing();
+      toggleEditing();
     })
     .catch(e => {
       setError(e.statusText);
     })
   }
 
-  const createRange = (e) => {
+  const createFormRange = (e) => {
     e.preventDefault();
 
     const newRange = {
-      chart_id: chart.id,
+      chart_id: currentChart.id,
       color: 'rgb(255, 51, 51)',
       coords: [],
       range_name: 'Range name'
     };
 
-    setRanges([...ranges, newRange])
+    setCurrentRanges([...currentRanges, newRange])
   }
 
-  const updateRange = (range, index) => {
-    const newRanges = [...ranges];
+  const updateFormRange = (range, index) => {
+    const newRanges = [...currentRanges];
     newRanges[index] = range;
-    setRanges(newRanges);
+    setCurrentRanges(newRanges);
   }
 
-  const deleteRange = (index) => {
-    const idToDelete = ranges[index].id;
+  const deleteFormRange = (index) => {
+    const idToDelete = currentRanges[index].id;
     if (idToDelete) {
-      setRanges(ranges.filter((range, i) => index !== i));
+      setCurrentRanges(currentRanges.filter((range, i) => index !== i));
       setIdsToDelete([...idsToDelete, idToDelete]);
     } else {
-      setRanges(ranges.filter((range, i) => index !== i));
+      setCurrentRanges(currentRanges.filter((range, i) => index !== i));
     }
   }
 
@@ -178,7 +264,7 @@ function ChartForm(props) {
   
   let title = 'New Chart'
   if (props.chart.id) {
-    title = `Editing ${chart.chart_name}`
+    title = `Editing ${currentChart.chart_name}`
   }
   const errorBox = (error) ? 
     <ErrorBox error={error} setError={(e) => setError({error: e})} />
@@ -190,8 +276,9 @@ function ChartForm(props) {
       <div className="chart-view">
         <h2>{title}</h2>
         <Chart 
-          ranges={ranges}
-          updateRanges={setRanges}
+          editing={editing}
+          ranges={currentRanges}
+          updateRanges={setCurrentRanges}
           currentRange={currentRangeIndex}
           handleChartMouseDown={handleChartMouseDown}
           handleChartMouseUp={handleChartMouseUp}
@@ -200,30 +287,27 @@ function ChartForm(props) {
           addingToRange={addingToRange}
         />
         {errorBox}
-        <form className="chart-name-form">
-          <input
-            className="chart-name-input"
-            type="text"
-            size="0"
-            id="chart-name-input"
-            placeholder='Chart Name'
-            value={chart.chart_name}
-            onChange={handleChartNameChange}
-          />
-        </form>
+        <ChartName
+          charts={allCharts}
+          setChart={setCurrentChart}
+          currentChart={currentChart}
+          handleChartNameChange={handleChartNameChange}
+        />
+        
         <div className="chart-toolbar">
-          <RangeForm
-            ranges={ranges}
-            createRange={createRange}
-            updateRange={updateRange}
-            deleteRange={deleteRange}
+          <ChartLegend
+            editing={editing}
+            ranges={currentRanges}
+            createRange={createFormRange}
+            updateRange={updateFormRange}
+            deleteRange={deleteFormRange}
             setRange={setCurrentRangeIndex}
             currentRange={currentRangeIndex}
           />
           <div className="button-col">
             <button 
               className="chart-btn"
-              onClick={createRange}
+              onClick={createFormRange}
             >
               Add Range
             </button>
@@ -235,7 +319,7 @@ function ChartForm(props) {
             </button>
             <button
               className="submit-chart-btn chart-btn"
-              onClick={handleNewChartSubmit}
+              onClick={handleFormSubmit}
             >
               Submit
             </button>

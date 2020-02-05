@@ -1,6 +1,6 @@
 import React from 'react';
 import Chart from '../Chart/Chart';
-import ChartSelect from '../ChartSelect/ChartSelect';
+import ChartSelect from '../ChartName/ChartName';
 import ChartLegend from '../ChartLegend/ChartLegend';
 import ChartBtns from '../ChartBtns/ChartBtns';
 import ErrorBox from '../ErrorBox/ErrorBox';

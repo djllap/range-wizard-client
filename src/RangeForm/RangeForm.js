@@ -46,13 +46,6 @@ export default function RangeForm(props) {
         backgroundColor: range.color
       }}
     >
-      {/*
-      <option 
-        value={undefined}
-        style={{backgroundColor: 'inherit'}}
-      >
-        {' '}
-      </option> */}
       {Object.entries(colors).map(entry => {
         const name = entry[0];
         const color = entry[1];

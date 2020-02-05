@@ -14,7 +14,7 @@ export default function Landing(props) {
             A tool to help you organize your many poker ranges into clear, easy to reference charts
           </div>
           <p className="section-para">
-            We get it. You have a lot of poker ranges. You tried storing them in Flopzilla, but only being too look at one range at a time is so limiting. You tried making your own multi-range charts in a spreadsheet, but they are so ugly and quickly switching between charts can be difficult. Range Wizard gives you the perfect tool to create beautiful, easy to use poker charts.
+            We get it. You have a lot of poker ranges. You tried storing them in Flopzilla, but only being able too look at one range at a time is so limiting. You tried making your own multi-range charts in a spreadsheet, but they are so ugly and quickly switching between charts can be difficult. Range Wizard gives you the perfect tool to create beautiful, easy to use poker charts.
           </p>
           <Link
             to="/charts"
