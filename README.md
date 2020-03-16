@@ -3,7 +3,7 @@ A tool to help you organize your many poker ranges into clear, easy to reference
 
 Hosted live at [range-wizard.now.sh/](https://range-wizard.now.sh/)
 
-Source code at [github.com/djllap/range-wizard-client](https://github.com/djllap/range-wizard-client)
+Back-end code at [https://github.com/djllap/range-wizard-api](https://github.com/djllap/range-wizard-api)
 
 ## What is it?
 Range Wizard is a tool for collecting and referencing poker range charts. Serious poker players often build many 'ranges', a given set of hands that they will play the same way in specific circumstances. Ranges are a good way to keep your play consistent and mathematically viable (e.g., by bluffing only on the hands in your range, you can control precisely your bluff to value bet ratio).
@@ -12,9 +12,6 @@ Range wizard allows color coded ranges to be grouped and displayed on a single c
 
 ## Technology Stack
 Range Wizard has an Express/Node backend API, with an independent React front end with React-Router. Styling is done with vanilla CSS only.
-
-## API Documentation
-[Range Wizard API](https://documenter.getpostman.com/view/9339504/SWLiY5MQ?version=latest)
 
 ## How it Works
 Range Wizard allows you to organize related ranges into a single, color-coded chart. The interface is simple and intuitive, so even those without much experience with computers can use Range Wizard without difficulty.
